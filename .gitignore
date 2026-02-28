@@ -1,2 +1,3 @@
 .rl_research_paper_env/
 .env
+*.pyc
