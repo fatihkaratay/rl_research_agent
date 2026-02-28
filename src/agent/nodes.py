@@ -4,6 +4,9 @@ from src.agent.state import AgentState
 from src.schemas import PaperAnalysis
 from src.database import check_if_exists
 
+from src.tools.huggingface import fetch_latest_rl_papers
+from src.database import insert_analyzed_paper
+
 # 1. Initialize the LLM (It will automatically find OPENAI_API_KEY in your .env)
 llm = ChatOpenAI(model="gpt-4o", temperature=0.2)
 
@@ -78,3 +81,25 @@ async def analyze_papers_node(state: AgentState) -> dict:
         print(f"Analysis complete! Novelty Score: {analysis.novelty_score}/10")
 
     return {"analyzed_papers": analyzed_results}
+
+async def fetch_papers_node(state: AgentState) -> dict:
+    """Entry point: Grabs papers using our Hugging Face tool."""
+    print("\n[NODE: FETCH] Searching for latest RL papers...")
+    papers = fetch_latest_rl_papers()
+    return {"raw_papers": papers}
+
+async def save_papers_node(state: AgentState) -> dict:
+    """Exit point: Saves the final AI analysis to MongoDB."""
+    analyzed_papers = state.get("analyzed_papers", [])
+    
+    if not analyzed_papers:
+        print("\n[NODE: SAVE] No new papers to save today.")
+        return {}
+
+    print(f"\n[NODE: SAVE] Storing {len(analyzed_papers)} analyzed papers to MongoDB...")
+    for paper_dict in analyzed_papers:
+        # Insert into database
+        await insert_analyzed_paper(paper_dict)
+        print(f" -> Saved to DB: {paper_dict.get('title')}")
+
+    return {} # We don't need to update the state further, the graph ends here.
