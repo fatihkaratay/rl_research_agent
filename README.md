@@ -2,20 +2,18 @@
 
 ```text
 rl_research_agent/
-├── .env                 # API Keys (OpenAI, Gemini, etc.)
-├── config.yaml          # Model settings & prompt configurations
-├── main.py              # FastAPI Entry point
-├── requirements.txt     # Dependencies
+├── .env                 # API Keys and Mongo URI
+├── main.py              # FastAPI entry point
 ├── src/
 │   ├── __init__.py
-│   ├── agent/           # The "Brain" (LangGraph logic)
-│   │   ├── graph.py     # Graph definition
-│   │   ├── nodes.py     # Logic for each step (Search, Analyze, etc.)
-│   │   └── state.py     # Schema for the data flowing through the graph
-│   ├── db/              # Database interaction layers
-│   │   ├── mongo_client.py
-│   │   └── mssql_client.py
-│   └── tools/           # External utility functions (ArXiv API, PDF parser)
-│       └── arxiv_search.py
-└── frontend/            # React application (we'll do this later)
+│   ├── database.py      # MongoDB connection & operations
+│   ├── schemas.py       # Pydantic models for data validation
+│   ├── agent/           # LangGraph workflow
+│   │   ├── __init__.py
+│   │   ├── graph.py     # The "state machine" definition
+│   │   └── nodes.py     # Individual steps (search, translate, etc.)
+│   └── tools/           # External API wrappers (ArXiv)
+│       ├── __init__.py
+│       └── arxiv.py
+└── requirements.txt
 ```

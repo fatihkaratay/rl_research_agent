@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+langgraph
+langchain-google-genai  # For Gemini Pro
+langchain-openai         # For GPT-4o
+motor                    # Asynchronous MongoDB driver
+arxiv                    # ArXiv API wrapper
+python-dotenv
+pydantic
+numpy
+pandas
