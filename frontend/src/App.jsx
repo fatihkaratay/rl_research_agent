@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './App.css';
 
 function App() {
   const [papers, setPapers] = useState([]);
@@ -60,7 +61,7 @@ function App() {
       ) : (
         <div className="grid grid-cols-1 gap-6">
           {papers.map((paper) => (
-            <div key={paper.arxiv_id} className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+            <div key={paper.arxiv_id} className="bg-white rounded-lg shadow-md p-6 border-l-4 border-white-500">
               <div className="flex justify-between items-start">
                 <h2 className="text-xl font-bold text-gray-900 mb-2">
                   <a href={paper.pdf_url} target="_blank" rel="noreferrer" className="hover:underline">
