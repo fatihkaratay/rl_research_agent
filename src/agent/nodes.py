@@ -23,7 +23,8 @@ prompt = ChatPromptTemplate.from_messages([
     2. The key innovation.
     3. The specific problem it addresses.
     4. The RL category (e.g., Offline RL, Multi-Agent, PPO, etc.).
-    5. A prediction on where this specific RL technology is heading, so the user knows if they should focus on this area.
+    5. The Universities, Companies, or Research Institutes the authors are affiliated with (extract from text, or use your broad knowledge of AI researchers to infer the lab).
+    6. A prediction on where this specific RL technology is heading.
     
     Finally, provide a comprehensive summary of the paper in TURKISH.
     """),

@@ -15,6 +15,7 @@ class PaperAnalysis(BaseModel):
     key_innovation: str
     problem_addressed: str
     rl_category: str  # e.g., "Offline RL", "Multi-Agent"
+    institutions: List[str] = Field(description="List of universities or research institutes the authors belong to.")
     turkish_summary: str
     trend_prediction: str
     processed_at: datetime = Field(default_factory=datetime.now)
