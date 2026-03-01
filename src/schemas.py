@@ -9,6 +9,7 @@ class PaperMetadata(BaseModel):
     published_date: str
     summary_short: str
     pdf_url: str
+    feed_type: str = "general"
 
 class PaperAnalysis(BaseModel):
     novelty_score: int = Field(ge=1, le=10) # 1-10 scale

@@ -6,6 +6,8 @@ class AgentState(TypedDict):
     The shared memory for our LangGraph agent.
     Each node will read from and write to these specific variables.
     """
+    # Tells the agent what to search for.
+    feed_type: str
     # What the Hugging Face tool finds
     raw_papers: List[PaperMetadata]
     

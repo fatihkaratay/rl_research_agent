@@ -6,6 +6,7 @@ from src.database import check_if_exists
 
 from src.tools.huggingface import fetch_latest_rl_papers
 from src.database import insert_analyzed_paper
+from src.tools.arxiv_authors import fetch_papers_by_authors
 
 # 1. Initialize the LLM (It will automatically find OPENAI_API_KEY in your .env)
 llm = ChatOpenAI(model="gpt-4o", temperature=0.2)
@@ -84,9 +85,19 @@ async def analyze_papers_node(state: AgentState) -> dict:
     return {"analyzed_papers": analyzed_results}
 
 async def fetch_papers_node(state: AgentState) -> dict:
-    """Entry point: Grabs papers using our Hugging Face tool."""
-    print("\n[NODE: FETCH] Searching for latest RL papers...")
-    papers = fetch_latest_rl_papers()
+    """Entry point: Grabs papers based on the requested feed_type."""
+    feed_type = state.get("feed_type", "general")
+    print(f"\n[NODE: FETCH] Searching for {feed_type} papers...")
+    
+    if feed_type == "author":
+        papers = fetch_papers_by_authors()
+    else:
+        papers = fetch_latest_rl_papers()
+        
+    # Tag each paper with its feed_type so the database can organize them
+    for paper in papers:
+        paper.feed_type = feed_type
+        
     return {"raw_papers": papers}
 
 async def save_papers_node(state: AgentState) -> dict:
