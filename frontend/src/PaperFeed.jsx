@@ -25,18 +25,42 @@ function PaperFeed({ feedType, title, subtitle }) {
     }
   };
 
+  // Smart Polling Logic
+  const checkStatusAndPoll = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/research/status/${feedType}`);
+      const data = await response.json();
+
+      if (data.is_running) {
+        setIsAgentRunning(true);
+        // Wait 3 seconds, then check again
+        setTimeout(checkStatusAndPoll, 3000); 
+      } else {
+        // If it WAS running and now it's not, fetch the new papers!
+        setIsAgentRunning((prevRunning) => {
+          if (prevRunning) {
+            fetchPapers();
+          }
+          return false;
+        });
+      }
+    } catch (error) {
+      console.error("Error checking status:", error);
+      setIsAgentRunning(false);
+    }
+  };
+
   useEffect(() => {
     fetchPapers();
+    checkStatusAndPoll();
   }, [feedType]);
 
   const triggerAgent = async () => {
     setIsAgentRunning(true);
     try {
       await fetch(`http://127.0.0.1:8000/api/research/run/${feedType}`, { method: "POST" });
-      setTimeout(() => {
-        setIsAgentRunning(false);
-        fetchPapers();
-      }, 5000);
+      // Kick off the polling cycle instead of a blind timeout
+      setTimeout(checkStatusAndPoll, 2000); 
     } catch (error) {
       console.error("Error triggering agent.", error);
       setIsAgentRunning(false);
