@@ -1,8 +1,9 @@
 import os
 import certifi
+import uvicorn
 from fastapi import FastAPI, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
+from src.tools.discovery import build_author_graph
 
 # --- macOS SSL Fix ---
 os.environ["SSL_CERT_FILE"] = certifi.where()
@@ -82,6 +83,16 @@ async def get_analyzed_papers(feed_type: str, limit: int = 20):
     cursor = papers_collection.find(query, {"_id": 0}).sort("published_date", -1).limit(limit)
     papers = await cursor.to_list(length=limit)
     return {"count": len(papers), "papers": papers}
+
+@app.get("/api/discover/{author_name}")
+async def get_discovery_graph(author_name: str, force_update: bool = False):
+    """Fetches the node graph and paper list for a specific author."""
+    try:
+        graph_data = await build_author_graph(author_name, force_update)
+        return graph_data
+    except Exception as e:
+        print(f"Graph Error: {e}")
+        return {"nodes": [], "links": [], "papers": []}
 
 if __name__ == "__main__":
     print("Starting FastAPI server on http://127.0.0.1:8000 ...")
