@@ -197,6 +197,17 @@ function Home() {
                 <span className="home-card-arrow" style={{ color: '#10b981' }}>→</span>
               </div>
             </Link>
+
+            <Link to="/discover" style={{ textDecoration: 'none' }}>
+              <div className="home-card" style={{ borderColor: 'rgba(168,85,247,0.4)' }}>
+                <div className="home-card-icon" style={{ background: 'linear-gradient(135deg, #9333ea, #a855f7)', boxShadow: '0 4px 10px rgba(168,85,247,0.3)' }}>🕸️</div>
+                <div>
+                  <h2 className="home-card-title">Network Discovery</h2>
+                  <p className="home-card-desc">Interactive physics graph mapping co-authors and citations.</p>
+                </div>
+                <span className="home-card-arrow" style={{ color: '#a855f7' }}>→</span>
+              </div>
+            </Link>
           </div>
 
           <p className="home-footer">Powered by Automated AI Analysis</p>

@@ -93,6 +93,16 @@ async def get_discovery_graph(author_name: str, force_update: bool = False):
     except Exception as e:
         print(f"Graph Error: {e}")
         return {"nodes": [], "links": [], "papers": []}
+    
+@app.get("/api/config")
+async def get_config():
+    """Securely exposes specific environment configurations to the frontend."""
+    # Grab the author from .env, and provide a safe fallback if it's missing
+    default_author = os.getenv("DISCOVERY_AUTHOR", "Abhishek Cauligi")
+    
+    return {
+        "discovery_author": default_author
+    }
 
 if __name__ == "__main__":
     print("Starting FastAPI server on http://127.0.0.1:8000 ...")
