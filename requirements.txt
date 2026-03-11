@@ -9,3 +9,7 @@ python-dotenv
 pydantic
 numpy
 pandas
+httpx                    # Async HTTP client
+apscheduler              # Feature 14: Scheduled auto-runs
+pdfplumber               # Feature 16: PDF text extraction
+certifi                  # SSL certificate bundle

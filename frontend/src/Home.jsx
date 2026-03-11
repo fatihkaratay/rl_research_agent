@@ -1,5 +1,80 @@
 import { Link } from 'react-router-dom';
 
+const NAV_ITEMS = [
+  {
+    to: '/latest',
+    icon: '🌍',
+    iconStyle: { background: 'linear-gradient(135deg, #6366f1, #818cf8)', boxShadow: '0 4px 10px rgba(99,102,241,0.3)' },
+    cardClass: '',
+    arrowColor: '#6366f1',
+    title: 'Global Trends',
+    desc: 'View the highest-signal RL papers curated by the community today.',
+  },
+  {
+    to: '/authors',
+    icon: '👨‍🔬',
+    iconStyle: { background: 'linear-gradient(135deg, #059669, #10b981)', boxShadow: '0 4px 10px rgba(16,185,129,0.3)' },
+    cardClass: 'green',
+    arrowColor: '#10b981',
+    title: 'Author Watchlist',
+    desc: 'Track the latest publications from your VIP list of AI researchers.',
+  },
+  {
+    to: '/arxiv',
+    icon: '📡',
+    iconStyle: { background: 'linear-gradient(135deg, #0891b2, #06b6d4)', boxShadow: '0 4px 10px rgba(6,182,212,0.3)' },
+    cardClass: 'cyan',
+    arrowColor: '#06b6d4',
+    title: 'ArXiv Direct Feed',
+    desc: 'Latest papers from cs.LG, cs.AI, cs.RO sorted by submission date.',
+  },
+  {
+    to: '/discover',
+    icon: '🕸️',
+    iconStyle: { background: 'linear-gradient(135deg, #9333ea, #a855f7)', boxShadow: '0 4px 10px rgba(168,85,247,0.3)' },
+    cardClass: 'purple',
+    arrowColor: '#a855f7',
+    title: 'Network Discovery',
+    desc: 'Interactive physics graph mapping co-authors and citations.',
+  },
+  {
+    to: '/kanban',
+    icon: '📋',
+    iconStyle: { background: 'linear-gradient(135deg, #d97706, #f59e0b)', boxShadow: '0 4px 10px rgba(245,158,11,0.3)' },
+    cardClass: 'amber',
+    arrowColor: '#f59e0b',
+    title: 'Reading Board',
+    desc: 'Drag-and-drop kanban to track your reading progress.',
+  },
+  {
+    to: '/timeline',
+    icon: '📈',
+    iconStyle: { background: 'linear-gradient(135deg, #db2777, #ec4899)', boxShadow: '0 4px 10px rgba(236,72,153,0.3)' },
+    cardClass: 'pink',
+    arrowColor: '#ec4899',
+    title: 'Research Timeline',
+    desc: 'Weekly paper activity and novelty trends with charts.',
+  },
+  {
+    to: '/feeds',
+    icon: '📡',
+    iconStyle: { background: 'linear-gradient(135deg, #0f766e, #14b8a6)', boxShadow: '0 4px 10px rgba(20,184,166,0.3)' },
+    cardClass: 'teal',
+    arrowColor: '#14b8a6',
+    title: 'Custom Feeds',
+    desc: 'Create and manage topic-specific research pipelines.',
+  },
+  {
+    to: '/settings',
+    icon: '⚙️',
+    iconStyle: { background: 'linear-gradient(135deg, #475569, #64748b)', boxShadow: '0 4px 10px rgba(100,116,139,0.3)' },
+    cardClass: 'slate',
+    arrowColor: '#64748b',
+    title: 'Settings',
+    desc: 'Manage watched authors, topics, ArXiv categories, and schedule.',
+  },
+];
+
 function Home() {
   return (
     <>
@@ -17,7 +92,7 @@ function Home() {
           overflow-y: auto;
           background: linear-gradient(160deg, #f1f5f9 0%, #e8edf5 50%, #eef1f7 100%);
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: center;
           font-family: 'Georgia', serif;
         }
@@ -32,7 +107,7 @@ function Home() {
         }
         .home-inner {
           width: 100%;
-          max-width: 520px;
+          max-width: 560px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -71,7 +146,7 @@ function Home() {
         .home-subtitle {
           font-size: 1rem;
           color: #64748b;
-          max-width: 360px;
+          max-width: 380px;
           line-height: 1.7;
           margin: 0 auto;
           font-family: sans-serif;
@@ -92,7 +167,7 @@ function Home() {
           background: #ffffff;
           border: 1px solid rgba(203,213,225,0.8);
           border-radius: 18px;
-          padding: 24px 28px;
+          padding: 20px 24px;
           display: flex;
           align-items: center;
           gap: 20px;
@@ -106,38 +181,33 @@ function Home() {
           box-shadow: 0 12px 32px rgba(99,102,241,0.12);
           border-color: rgba(99,102,241,0.4);
         }
-        .home-card.green:hover {
-          box-shadow: 0 12px 32px rgba(16,185,129,0.1);
-          border-color: rgba(16,185,129,0.4);
-        }
+        .home-card.green:hover { box-shadow: 0 12px 32px rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.4); }
+        .home-card.cyan:hover { box-shadow: 0 12px 32px rgba(6,182,212,0.1); border-color: rgba(6,182,212,0.4); }
+        .home-card.purple:hover { box-shadow: 0 12px 32px rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.4); }
+        .home-card.amber:hover { box-shadow: 0 12px 32px rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.4); }
+        .home-card.pink:hover { box-shadow: 0 12px 32px rgba(236,72,153,0.1); border-color: rgba(236,72,153,0.4); }
+        .home-card.teal:hover { box-shadow: 0 12px 32px rgba(20,184,166,0.1); border-color: rgba(20,184,166,0.4); }
+        .home-card.slate:hover { box-shadow: 0 12px 32px rgba(100,116,139,0.1); border-color: rgba(100,116,139,0.4); }
         .home-card-icon {
-          width: 52px;
-          height: 52px;
+          width: 48px;
+          height: 48px;
           flex-shrink: 0;
           border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 24px;
-        }
-        .home-card-icon.indigo {
-          background: linear-gradient(135deg, #6366f1, #818cf8);
-          box-shadow: 0 4px 10px rgba(99,102,241,0.3);
-        }
-        .home-card-icon.green {
-          background: linear-gradient(135deg, #059669, #10b981);
-          box-shadow: 0 4px 10px rgba(16,185,129,0.3);
+          font-size: 22px;
         }
         .home-card-title {
-          margin: 0 0 5px;
-          font-size: 1.05rem;
+          margin: 0 0 4px;
+          font-size: 1rem;
           font-weight: 700;
           color: #1e293b;
           font-family: sans-serif;
         }
         .home-card-desc {
           margin: 0;
-          font-size: 0.845rem;
+          font-size: 0.82rem;
           color: #94a3b8;
           font-family: sans-serif;
           line-height: 1.5;
@@ -174,40 +244,20 @@ function Home() {
 
           <div className="home-divider" />
 
-          {/* Cards */}
+          {/* Navigation cards */}
           <div className="home-cards">
-            <Link to="/latest" style={{ textDecoration: 'none' }}>
-              <div className="home-card">
-                <div className="home-card-icon indigo">🌍</div>
-                <div>
-                  <h2 className="home-card-title">Global Trends</h2>
-                  <p className="home-card-desc">View the highest-signal RL papers curated by the community today.</p>
+            {NAV_ITEMS.map(item => (
+              <Link key={item.to} to={item.to} style={{ textDecoration: 'none' }}>
+                <div className={`home-card ${item.cardClass}`}>
+                  <div className="home-card-icon" style={item.iconStyle}>{item.icon}</div>
+                  <div>
+                    <h2 className="home-card-title">{item.title}</h2>
+                    <p className="home-card-desc">{item.desc}</p>
+                  </div>
+                  <span className="home-card-arrow" style={{ color: item.arrowColor }}>→</span>
                 </div>
-                <span className="home-card-arrow" style={{ color: '#6366f1' }}>→</span>
-              </div>
-            </Link>
-
-            <Link to="/authors" style={{ textDecoration: 'none' }}>
-              <div className="home-card green">
-                <div className="home-card-icon green">👨‍🔬</div>
-                <div>
-                  <h2 className="home-card-title">Author Watchlist</h2>
-                  <p className="home-card-desc">Track the latest publications from your VIP list of AI researchers.</p>
-                </div>
-                <span className="home-card-arrow" style={{ color: '#10b981' }}>→</span>
-              </div>
-            </Link>
-
-            <Link to="/discover" style={{ textDecoration: 'none' }}>
-              <div className="home-card" style={{ borderColor: 'rgba(168,85,247,0.4)' }}>
-                <div className="home-card-icon" style={{ background: 'linear-gradient(135deg, #9333ea, #a855f7)', boxShadow: '0 4px 10px rgba(168,85,247,0.3)' }}>🕸️</div>
-                <div>
-                  <h2 className="home-card-title">Network Discovery</h2>
-                  <p className="home-card-desc">Interactive physics graph mapping co-authors and citations.</p>
-                </div>
-                <span className="home-card-arrow" style={{ color: '#a855f7' }}>→</span>
-              </div>
-            </Link>
+              </Link>
+            ))}
           </div>
 
           <p className="home-footer">Powered by Automated AI Analysis</p>
