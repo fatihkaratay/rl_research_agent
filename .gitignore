@@ -1,3 +1,4 @@
 .rl_research_paper_env/
 .env
 *.pyc
+.DS_Store
